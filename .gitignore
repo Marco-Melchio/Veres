@@ -1,4 +1,4 @@
-node_modules
-data\users
-backup
+node_modules/
+data/users/
+backup/
 .env
