@@ -22,7 +22,7 @@ module.exports = {
 
     // Hier setzt du die CDN-URL deines in Discord hochgeladenen Bildes ein:
     const discordImageUrl =
-      'https://cdn.discordapp.com/attachments/1378314925499482163/1378315047066931231/veres_bright.png?ex=683c276b&is=683ad5eb&hm=a8b791fbd3ed920d23868790adfdd1e8e20ed80a492726a066ce3249d4621a7f&';
+      'https://cdn.discordapp.com/attachments/1378314925499482163/1378315047066931231/veres_bright.png?ex=68401beb&is=683eca6b&hm=5a153bbe938c85fb37aabf40a2ebec17f9aa03b4f39a75419caa4333bdf3720b&';
     
     const embed = new EmbedBuilder()
       .setTitle('📚 Hilfe-Menü')
