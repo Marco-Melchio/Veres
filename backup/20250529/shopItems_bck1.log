@@ -1,0 +1,14 @@
+module.exports = {
+  'Liebesmagnet': {
+    price: 100,
+    description: '🔄 +1 Chance auf Extraherz beim /love'
+  },
+  'Herzregen': {
+    price: 250,
+    description: '💥 Chance auf doppelte Drops'
+  },
+  'Autoliebe': {
+    price: 500,
+    description: '🕒 Passiv 1 Herz pro Stunde'
+  }
+};

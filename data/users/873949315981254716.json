@@ -1,0 +1,15 @@
+{
+  "inventory": {
+    "Common": 1,
+    "Rare": 1,
+    "Epic": 0,
+    "Legendary": 0
+  },
+  "coins": 0,
+  "upgrades": [],
+  "lastClaim": null,
+  "lastDaily": null,
+  "streak": 0,
+  "title": "Anfänger der Liebe",
+  "achievements": {}
+}

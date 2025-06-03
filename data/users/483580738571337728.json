@@ -1,0 +1,33 @@
+{
+  "inventory": {
+    "Common": 0,
+    "Rare": 0,
+    "Epic": 0,
+    "Legendary": 0
+  },
+  "coins": 300,
+  "upgrades": [
+    "Liebesmagnet",
+    "Autoliebe",
+    "Kritisches Herz",
+    "Streak-Booster",
+    "Herzregen",
+    "Legendensucher",
+    "Goldgräber"
+  ],
+  "lastClaim": null,
+  "lastDaily": "2025-06-01T15:29:14.295Z",
+  "streak": 1,
+  "title": "Anfänger der Liebe",
+  "hearts": 5,
+  "achievements": {
+    "Liebeslegende 💎": true,
+    "Goldgräber 💰": true,
+    "Herzenssammler 🧺": true
+  },
+  "upgradeLevels": {
+    "Liebesmagnet": 4,
+    "Herzregen": 1,
+    "Autoliebe": 1
+  }
+}
