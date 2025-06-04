@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { getLoveDropBonus, getRareMultiplier } = require('../../utils/effects');
 const { getUserFile } = require('../../utils/user');
 const { checkAchievements } = require('../../utils/achievements');
@@ -57,16 +57,17 @@ module.exports = {
       `${h.emoji} ${h.name}: ${data.inventory[h.name]}`
     ).join('\n');
 
-    let reply = `Du hast **${dropCount} Herz${dropCount > 1 ? 'en' : ''}** gefunden:\n${earnedList}`;
+    const embed = new EmbedBuilder()
+      .setTitle(`❤️ Du hast ${dropCount} Herz${dropCount > 1 ? 'en' : ''} gefunden`)
+      .setDescription(earnedList)
+      .setColor(0xff66cc);
 
     if (unlocked.length > 0) {
-      reply += `\n\n🏆 **Neue Erfolge freigeschaltet!**\n• ${unlocked.join('\n• ')}`;
+      embed.addFields({ name: 'Neue Erfolge', value: unlocked.map(u => `• ${u}`).join('\n') });
     }
 
-    reply += `\n\n📦 **Aktueller Stand:**\n${totalList}`;
+    embed.addFields({ name: 'Aktueller Stand', value: totalList });
 
-    await interaction.reply({
-      content: reply,
-    });
+    await interaction.reply({ embeds: [embed] });
   },
 };

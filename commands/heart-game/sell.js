@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { getUserFile } = require('../../utils/user');
 const fs = require('fs');
 const {
@@ -50,14 +50,18 @@ module.exports = {
     }
 
     if (totalCoins === 0) {
-      return interaction.reply({ content: `${EMOJI_INFO} Du hast keine Herzen zu verkaufen.`, })
+      return interaction.reply({ content: `${EMOJI_INFO} Du hast keine Herzen zu verkaufen.` });
     }
 
     data.coins += totalCoins;
     fs.writeFileSync(file, JSON.stringify(data, null, 2));
 
-    await interaction.reply({
-      content: `💸 Du hast folgende Herzen verkauft:\n${sold.join('\n')}\n\nErhalten: **${totalCoins}** 💰`
-    });
+    const embed = new EmbedBuilder()
+      .setTitle('💸 Verkauf')
+      .setDescription(sold.map(s => `• ${s}`).join('\n'))
+      .addFields({ name: 'Erhalten', value: `${totalCoins} ${EMOJI_COIN}` })
+      .setColor(0xff66cc);
+
+    await interaction.reply({ embeds: [embed] });
   }
 };

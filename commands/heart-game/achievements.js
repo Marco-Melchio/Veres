@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { getUserFile } = require('../../utils/user');
 const { getAllAchievements } = require('../../utils/achievements');
 const { EMOJI_OK, EMOJI_ERROR } = require('../../utils/emojis');
@@ -19,8 +19,11 @@ module.exports = {
       return `${symbol} ${name}`;
     });
 
-    await interaction.reply({
-      content: `**Deine Erfolge:**\n\n${shown.join('\n')}`,
-    });
+    const embed = new EmbedBuilder()
+      .setTitle('🏆 Deine Erfolge')
+      .setDescription(shown.map(s => `• ${s}`).join('\n'))
+      .setColor(0xff66cc);
+
+    await interaction.reply({ embeds: [embed] });
   }
 };
