@@ -36,7 +36,7 @@ module.exports = {
           name: interaction.user.username,
           iconURL: interaction.user.displayAvatarURL({ dynamic: true })
         })
-        .setColor(0xff0000)
+        .setColor(0xff0000
         .setDescription(`🕒 Du musst noch **${minutes} Minute${minutes !== 1 ? 'n' : ''}** warten, bevor du Autoliebe erneut verwenden kannst.`)
         .setFooter({ text: `${interaction.user.username}` });
       return interaction.reply({ embeds: [embed] });
