@@ -47,6 +47,6 @@ module.exports = {
       )
       .setFooter({ text: `${interaction.user.username}` });
 
-    await interaction.reply({ embeds: [embed], flags: 1 << 6 });
+    await interaction.reply({ embeds: [embed] });
   }
 };
