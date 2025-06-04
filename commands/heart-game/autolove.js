@@ -15,11 +15,11 @@ module.exports = {
 
     if (!data.upgrades.includes('Autoliebe')) {
       const embed = new EmbedBuilder()
-      .setAuthor({
-        name: interaction.user.username,
-        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
-      })
-        .setColor(0xff66cc)
+        .setAuthor({
+          name: interaction.user.username,
+          iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+        })
+        .setColor(0xff0000)
         .setDescription('❌ Du besitzt das Upgrade **Autoliebe** nicht. Kaufe es mit `/buy Autoliebe`.')
         .setFooter({ text: `${interaction.user.username}` });
       return interaction.reply({ embeds: [embed] });
@@ -32,11 +32,11 @@ module.exports = {
     if (diff < 1000 * 60 * 60) {
       const minutes = Math.ceil((60 - diff / 1000 / 60));
       const embed = new EmbedBuilder()
-      .setAuthor({
-        name: interaction.user.username,
-        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
-      })
-        .setColor(0xff66cc)
+        .setAuthor({
+          name: interaction.user.username,
+          iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+        })
+        .setColor(0xff0000
         .setDescription(`🕒 Du musst noch **${minutes} Minute${minutes !== 1 ? 'n' : ''}** warten, bevor du Autoliebe erneut verwenden kannst.`)
         .setFooter({ text: `${interaction.user.username}` });
       return interaction.reply({ embeds: [embed] });
@@ -47,13 +47,13 @@ module.exports = {
     fs.writeFileSync(file, JSON.stringify(data, null, 2));
 
     const embed = new EmbedBuilder()
-    .setAuthor({
-      name: interaction.user.username,
-      iconURL: interaction.user.displayAvatarURL({ dynamic: true })
-    })
-    .setColor(0xff66cc)
-    .setDescription(`Du hast 1 ❤️ durch Autoliebe erhalten!\nAktueller Stand: **${data.hearts}** ❤️.`)
-    .setFooter({ text: `${interaction.user.username}` });
+      .setAuthor({
+        name: interaction.user.username,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
+      .setColor(0xff0000)
+      .setDescription(`💘 Du hast 1 ❤️ durch Autoliebe erhalten!\nAktueller Stand: **${data.hearts}** ❤️.`)
+      .setFooter({ text: `${interaction.user.username}` });
 
     await interaction.reply({ embeds: [embed] });
   },

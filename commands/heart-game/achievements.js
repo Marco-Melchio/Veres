@@ -25,8 +25,8 @@ module.exports = {
         iconURL: interaction.user.displayAvatarURL({ dynamic: true })
       })
       .setTitle('🏆 Deine Erfolge')
-      .setDescription(shown.map(s => `${s}`).join('\n'))
-      .setColor(0xff66cc)
+      .setDescription(shown.map(s => `• ${s}`).join('\n'))
+      .setColor(0xff0000)
       .setFooter({ text: `${interaction.user.username}` });
 
     await interaction.reply({ embeds: [embed] });
