@@ -32,33 +32,34 @@ function loadCommands(dir = path.join(__dirname, 'commands')) {
       try {
         const command = require(fullPath);
         if (!command.data || !command.execute) {
-          console.warn(`ERROR | Ungültiger Command (fehlende Struktur): ${fullPath}`);
+          console.log(' ');
+          console.warn(`ERROR     | Ungültiger Command (fehlende Struktur): ${fullPath}`);
           continue;
         }
 
         // Validierung
         const json = command.data.toJSON?.();
         if (!json) {
-          console.warn(`ERROR | .toJSON() fehlt bei: ${fullPath}`);
+          console.warn(`ERROR     | .toJSON() fehlt bei: ${fullPath}`);
           continue;
         }
 
         if (!json.name || typeof json.name !== 'string') {
-          console.warn(`ERROR | Name fehlt oder ungültig bei: ${fullPath}`);
+          console.warn(`ERROR     | Name fehlt oder ungültig bei: ${fullPath}`);
           continue;
         }
 
         if (!json.description || typeof json.description !== 'string') {
-          console.warn(`ERROR | Beschreibung fehlt bei: ${fullPath}`);
+          console.warn(`ERROR     | Beschreibung fehlt bei: ${fullPath}`);
           continue;
         }
 
         // OK
         client.commands.set(command.data.name, command);
         commands.push(json);
-        console.log(`SUCCESFULLY : ${json.name}`);
+        console.log(`SUCCESFULLY | ${json.name}`);
       } catch (error) {
-        console.error(`ERROR | Fehler beim Laden von ${fullPath}:`, error.message);
+        console.error(`ERROR     | Fehler beim Laden von ${fullPath}:`, error.message);
       }
     }
   }
@@ -67,29 +68,29 @@ function loadCommands(dir = path.join(__dirname, 'commands')) {
 loadCommands();
 
 client.once('ready', async () => {
-  console.log(`\nLOGIN  | Eingeloggt als ${client.user.tag}`);
+  console.log(`\nLOGIN       | Eingeloggt als ${client.user.tag}`);
 
   const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
   const guildId = '822450632598355999';
 
-  console.log('DEBUG  | Bot-ID:', client.user.id);
-  console.log('DEBUG  | Guild-ID:', guildId);
-  console.log('DEBUG  | Commands:', commands.length);
+  console.log('DEBUG       | Bot-ID:', client.user.id);
+  console.log('DEBUG       | Guild-ID:', guildId);
+  console.log('DEBUG       | Commands:', commands.length);
 
   try {
-    console.log('\nDELETE | Lösche alte Commands...');
+    console.log('\nDELETE      | Lösche alte Commands...');
     await rest.put(Routes.applicationGuildCommands(client.user.id, guildId), { body: [] });
-    console.log('DELETE | Alte Commands gelöscht.');
+    console.log('DELETE      | Alte Commands gelöscht.');
 
-    console.log('\nREGIST | Registriere neue Slash-Commands...');
+    console.log('\nREGIST      | Registriere neue Slash-Commands...');
     await rest.put(
       Routes.applicationGuildCommands(client.user.id, guildId),
       //Routes.applicationCommands(client.user.id),
       { body: commands }
     );
-    console.log('SUCCES | Registrierung abgeschlossen!');
+    console.log('SUCCESFULLY | Registrierung abgeschlossen!');
   } catch (error) {
-    console.error('\nERROR | Fehler beim Registrieren:\n', error);
+    console.error('\nERROR     | Fehler beim Registrieren:\n', error);
   }
 });
 
@@ -104,7 +105,7 @@ client.on('interactionCreate', async (interaction) => {
         await command.autocomplete(interaction);
       }
     } catch (err) {
-      console.error(`ERROR | Fehler im Autocomplete-Handler von /${interaction.commandName}:`, err);
+      console.error(`ERROR     | Fehler im Autocomplete-Handler von /${interaction.commandName}:`, err);
     }
     return;
   }
@@ -117,9 +118,9 @@ client.on('interactionCreate', async (interaction) => {
     try {
       await command.execute(interaction);
     } catch (err) {
-      console.error(`ERROR | Fehler bei /${interaction.commandName}:`, err);
+      console.error(`ERROR     | Fehler bei /${interaction.commandName}:`, err);
       if (!interaction.replied) {
-        await interaction.reply({ content: 'ERROR | Fehler beim Ausführen.' });
+        await interaction.reply({ content: 'ERROR     | Fehler beim Ausführen.' });
       }
     }
     return;
