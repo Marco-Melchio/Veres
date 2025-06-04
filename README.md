@@ -1,4 +1,4 @@
-# 💘 Veres – Der Herzspiel Discord-Bot
+# 💘 Veres – Discord-Bot
 
 **Veres** ist ein interaktiver Discord-Bot mit einem liebevoll gestalteten Herzspiel. Benutzer können Herzen sammeln, Erfolge freischalten, tägliche Belohnungen erhalten, Items kaufen, Upgrades durchführen, und sich mit anderen Spielern im Leaderboard messen. Mit hübsch gestalteten Embeds und einer durchdachten Benutzererfahrung macht Veres den Server-Alltag bunter.
 
