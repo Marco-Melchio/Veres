@@ -20,9 +20,14 @@ module.exports = {
     });
 
     const embed = new EmbedBuilder()
+      .setAuthor({
+        name: interaction.user.username,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
       .setTitle('🏆 Deine Erfolge')
-      .setDescription(shown.map(s => `• ${s}`).join('\n'))
-      .setColor(0xff66cc);
+      .setDescription(shown.map(s => `${s}`).join('\n'))
+      .setColor(0xff66cc)
+      .setFooter({ text: `${interaction.user.username}` });
 
     await interaction.reply({ embeds: [embed] });
   }
