@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -25,8 +25,11 @@ module.exports = {
       return `${i + 1}. **${user?.username || 'Unbekannt'}** – ${u.coins} 💰`;
     }));
 
-    await interaction.reply({
-      content: `🏆 **Top 5 Lover von Veres**:\n\n${entries.join('\n')}`,
-    });
+    const embed = new EmbedBuilder()
+      .setTitle('🏆 Top 5 Lover von Veres')
+      .setColor(0xff66cc)
+      .setDescription(entries.join('\n'));
+
+    await interaction.reply({ embeds: [embed] });
   },
 };

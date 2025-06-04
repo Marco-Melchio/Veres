@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
 const { getUserFile } = require('../../utils/user');
 
@@ -14,9 +14,10 @@ module.exports = {
     const { data, file } = getUserFile(userId);
 
     if (!data.upgrades.includes('Autoliebe')) {
-      return interaction.reply({
-        content: '❌ Du besitzt das Upgrade **Autoliebe** nicht. Kaufe es mit `/buy Autoliebe`.'
-      });
+      const embed = new EmbedBuilder()
+        .setColor(0xff66cc)
+        .setDescription('❌ Du besitzt das Upgrade **Autoliebe** nicht. Kaufe es mit `/buy Autoliebe`.');
+      return interaction.reply({ embeds: [embed] });
     }
 
     const now = Date.now();
@@ -25,17 +26,20 @@ module.exports = {
 
     if (diff < 1000 * 60 * 60) {
       const minutes = Math.ceil((60 - diff / 1000 / 60));
-      return interaction.reply({
-        content: `🕒 Du musst noch **${minutes} Minute${minutes !== 1 ? 'n' : ''}** warten, bevor du Autoliebe erneut verwenden kannst.`
-      });
+      const embed = new EmbedBuilder()
+        .setColor(0xff66cc)
+        .setDescription(`🕒 Du musst noch **${minutes} Minute${minutes !== 1 ? 'n' : ''}** warten, bevor du Autoliebe erneut verwenden kannst.`);
+      return interaction.reply({ embeds: [embed] });
     }
 
     data.hearts += 1;
     data.lastClaim = new Date().toISOString();
     fs.writeFileSync(file, JSON.stringify(data, null, 2));
 
-    await interaction.reply({
-      content: `💘 Du hast 1 ❤️ durch Autoliebe erhalten!\nAktueller Stand: **${data.hearts}** ❤️.`
-    });
+    const embed = new EmbedBuilder()
+      .setColor(0xff66cc)
+      .setDescription(`💘 Du hast 1 ❤️ durch Autoliebe erhalten!\nAktueller Stand: **${data.hearts}** ❤️.`);
+
+    await interaction.reply({ embeds: [embed] });
   },
 };

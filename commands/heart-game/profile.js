@@ -32,7 +32,9 @@ module.exports = {
         { name: '💘 Epic', value: `${data.inventory.Epic}`, inline: true },
         { name: '💎 Legendary', value: `${data.inventory.Legendary}`, inline: true }
       )
-      .setColor(0xff66cc);
+      .setColor(0xff66cc)
+      .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+      .setFooter({ text: 'Veres' });
 
     await interaction.reply({ embeds: [embed] });
   }

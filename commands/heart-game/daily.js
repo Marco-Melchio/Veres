@@ -1,5 +1,6 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
+const { EMOJI_COIN } = require('../../utils/emojis');
 const { getUserFile } = require('../../utils/user');
 
 function getReward(streak) {
@@ -19,9 +20,10 @@ module.exports = {
 
     if (now - last < 1000 * 60 * 60 * 24) {
       const hours = Math.ceil((24 - (now - last) / 1000 / 60 / 60));
-      return interaction.reply({
-        content: `🕒 Du hast deine Belohnung heute schon erhalten. Komm in **${hours}h** wieder.`
-      });
+      const embed = new EmbedBuilder()
+        .setColor(0xff66cc)
+        .setDescription(`🕒 Du hast deine Belohnung heute schon erhalten. Komm in **${hours}h** wieder.`);
+      return interaction.reply({ embeds: [embed] });
     }
 
     // Streak prüfen
@@ -38,8 +40,15 @@ module.exports = {
 
     fs.writeFileSync(file, JSON.stringify(data, null, 2));
 
-    await interaction.reply({
-      content: `🎁 Du hast deine tägliche Belohnung erhalten: **${reward} Coins**!\nLogin-Streak: ${data.streak} 🔥`
-    });
+    const embed = new EmbedBuilder()
+      .setTitle('🎁 Tägliche Belohnung')
+      .setColor(0xff66cc)
+      .setDescription(`Du erhältst **${reward}** ${EMOJI_COIN}`)
+      .addFields(
+        { name: '🔥 Streak', value: `${data.streak}`, inline: true },
+        { name: 'Coins', value: `${data.coins}`, inline: true }
+      );
+
+    await interaction.reply({ embeds: [embed] });
   }
 };
