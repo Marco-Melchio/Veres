@@ -57,10 +57,15 @@ module.exports = {
     fs.writeFileSync(file, JSON.stringify(data, null, 2));
 
     const embed = new EmbedBuilder()
+      .setAuthor({
+        name: interaction.user.username,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
       .setTitle('💸 Verkauf')
       .setDescription(sold.map(s => `• ${s}`).join('\n'))
       .addFields({ name: 'Erhalten', value: `${totalCoins} ${EMOJI_COIN}` })
-      .setColor(0xff66cc);
+      .setColor(0xff0000)
+      .setFooter({ text: `${interaction.user.username}` });
 
     await interaction.reply({ embeds: [embed] });
   }

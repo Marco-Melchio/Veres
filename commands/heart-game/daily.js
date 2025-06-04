@@ -21,8 +21,13 @@ module.exports = {
     if (now - last < 1000 * 60 * 60 * 24) {
       const hours = Math.ceil((24 - (now - last) / 1000 / 60 / 60));
       const embed = new EmbedBuilder()
-        .setColor(0xff66cc)
-        .setDescription(`🕒 Du hast deine Belohnung heute schon erhalten. Komm in **${hours}h** wieder.`);
+        .setAuthor({
+          name: interaction.user.username,
+          iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+        })
+        .setColor(0xff0000)
+        .setDescription(`🕒 Du hast deine Belohnung heute schon erhalten. Komm in **${hours}h** wieder.`)
+        .setFooter({ text: `${interaction.user.username}` });
       return interaction.reply({ embeds: [embed] });
     }
 
@@ -41,13 +46,18 @@ module.exports = {
     fs.writeFileSync(file, JSON.stringify(data, null, 2));
 
     const embed = new EmbedBuilder()
+      .setAuthor({
+        name: interaction.user.username,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
       .setTitle('🎁 Tägliche Belohnung')
-      .setColor(0xff66cc)
+      .setColor(0xff0000)
       .setDescription(`Du erhältst **${reward}** ${EMOJI_COIN}`)
       .addFields(
         { name: '🔥 Streak', value: `${data.streak}`, inline: true },
         { name: 'Coins', value: `${data.coins}`, inline: true }
-      );
+      )
+      .setFooter({ text: `${interaction.user.username}` });
 
     await interaction.reply({ embeds: [embed] });
   }

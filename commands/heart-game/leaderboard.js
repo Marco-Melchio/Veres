@@ -26,9 +26,14 @@ module.exports = {
     }));
 
     const embed = new EmbedBuilder()
+      .setAuthor({
+        name: interaction.user.username,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
       .setTitle('🏆 Top 5 Lover von Veres')
-      .setColor(0xff66cc)
-      .setDescription(entries.join('\n'));
+      .setColor(0xff0000)
+      .setDescription(entries.join('\n'))
+      .setFooter({ text: `${interaction.user.username}` });
 
     await interaction.reply({ embeds: [embed] });
   },

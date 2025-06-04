@@ -14,9 +14,14 @@ module.exports = {
     const mult = (getRareMultiplier(data) * 100).toFixed(1);
 
     const embed = new EmbedBuilder()
+      .setAuthor({
+        name: interaction.user.username,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
       .setTitle('🎯 Aktive Effekte')
-      .setColor(0xff66cc)
-      .setDescription(`➕ Extra-Herzen: **+${drops}** pro /love\n🎲 Chance auf doppelte Herzen: **${mult}%**`);
+      .setColor(0xff0000)
+      .setDescription(`➕ Extra-Herzen: **+${drops}** pro /love\n🎲 Chance auf doppelte Herzen: **${mult}%**`)
+      .setFooter({ text: `${interaction.user.username}` });
 
     await interaction.reply({ embeds: [embed] });
   }

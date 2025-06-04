@@ -58,9 +58,14 @@ module.exports = {
     ).join('\n');
 
     const embed = new EmbedBuilder()
+      .setAuthor({
+        name: interaction.user.username,
+        iconURL: interaction.user.displayAvatarURL({ dynamic: true })
+      })
       .setTitle(`❤️ Du hast ${dropCount} Herz${dropCount > 1 ? 'en' : ''} gefunden`)
       .setDescription(earnedList)
-      .setColor(0xff66cc);
+      .setColor(0xff0000)
+      .setFooter({ text: `${interaction.user.username}` });
 
     if (unlocked.length > 0) {
       embed.addFields({ name: 'Neue Erfolge', value: unlocked.map(u => `• ${u}`).join('\n') });
