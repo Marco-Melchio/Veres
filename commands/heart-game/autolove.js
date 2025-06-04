@@ -13,14 +13,14 @@ module.exports = {
     const userId = interaction.user.id;
     const { data, file } = getUserFile(userId);
 
-    if (!data.upgrades.includes('Autoliebe')) {
+    if (!data.upgrades.includes('AutoLove')) {
       const embed = new EmbedBuilder()
         .setAuthor({
           name: interaction.user.username,
           iconURL: interaction.user.displayAvatarURL({ dynamic: true })
         })
         .setColor(0xff0000)
-        .setDescription('❌ Du besitzt das Upgrade **Autoliebe** nicht. Kaufe es mit `/buy Autoliebe`.')
+        .setDescription('❌ Du besitzt das Upgrade **AutoLove** nicht. Kaufe es mit `/buy AutoLove`.')
         .setFooter({ text: `${interaction.user.username}` });
       return interaction.reply({ embeds: [embed] });
     }
@@ -37,7 +37,7 @@ module.exports = {
           iconURL: interaction.user.displayAvatarURL({ dynamic: true })
         })
         .setColor(0xff0000)
-        .setDescription(`🕒 Du musst noch **${minutes} Minute${minutes !== 1 ? 'n' : ''}** warten, bevor du Autoliebe erneut verwenden kannst.`)
+        .setDescription(`🕒 Du musst noch **${minutes} Minute${minutes !== 1 ? 'n' : ''}** warten, bevor du AutoLove erneut verwenden kannst.`)
         .setFooter({ text: `${interaction.user.username}` });
       return interaction.reply({ embeds: [embed] });
     }

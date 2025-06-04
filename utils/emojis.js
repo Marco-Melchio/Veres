@@ -24,8 +24,10 @@ module.exports = {
     EMOJI_ERROR:        '<:vError:1378364041143128116>',
     EMOJI_INFO:         '<:vInfo:1378364038135681064>',
 
-    // Emoji für Coins
+    // Emoji Animated
     EMOJI_COIN:         '<a:vCoin:1378364042908925962>',
+    EMOJI_SHOP:         '<a:vShop:1379900172573737202>',
+
 
     // Emojis für Herz-Game
     EMOJI_BLACK_HEART:  '<:vBlackHeart:1247664923010404414>',
@@ -39,4 +41,24 @@ module.exports = {
     EMOJI_TOXIC_HEART:  '<:vToxicHeart:1247664877082775625>',
     EMOJI_HEALTH_HEART: '<:vHealthHeart:1247664872431423648>',
     EMOJI_BROWN_HEART:  '<:vBronzeHeart:1247664878517489705>',
+
+    EMOJI_EXPLOSIV:     '<a:vexplosivheart:1379921936569729195>',
+    EMOJI_PERFECT:      '<a:vperfectheart:1379921772475842621>',
+    EMOJI_DOUBLE:       '<a:vdoubleheart:1379921768268955689>',
+    EMOJI_CAKE:         '<a:vcakeheart:1379921074501980242>',
+    EMOJI_CUPCAKE:      '<a:vcupcakeheart:1379921069468811404>',
+    EMOJI_GOD:          '<a:vgodheart:1379921062950862919>',
+    EMOJI_BALOON:       '<a:vbaloonheart:1379921052787802243>',
+    EMOJI_LETTER:       '<a:vletterheart:1379921044659376199>',
+    EMOJI_ACTION:       '<a:vactionheart:1379921040725114951>',
+    EMOJI_DART:         '<a:vdartheart:1379921032999337994>',
+    EMOJI_PRESENT:      '<a:vheartpresent:1379921025948586156>',
+    EMOJI_GLITTER:      '<a:vglitterheart:1379909169104027669>',
+    EMOJI_HEART:        '<a:vheart:1379909162192080927>',
+
+    EMOJI_SPLITTER:      '<a:vsplitter:1379943676570243073>',
+    EMOJI_SEARCHER:      '<a:vsearcher:1379943672065556691>',
+    EMOJI_GOLDDIGGER:    '<a:vgolddigger:1379943696920744028>',
+    EMOJI_BOOSTER:       '<a:vbooster:1379943690327429221>',
+    EMOJI_TITEL:         '<a:vtitel:1379947240101253200>',
 };
