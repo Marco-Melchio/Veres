@@ -8,9 +8,17 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "**Veres** ist ein interaktiver Discord-Bot mit einem liebevoll gestalteten Herzspiel. Benutzer können Herzen sammeln, Erfolge freischalten, tägliche Belohnungen erhalten, Items kaufen, Upgrades durchführen, und sich mit anderen Spielern im Leaderboard messen. Mit hübsch gestalteten Embeds und einer durchdachten Benutzererfahrung macht Veres den Server-Alltag bunter.",
   "dependencies": {
     "discord.js": "^14.19.3",
     "dotenv": "^16.5.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marco-Melchio/Veres.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Marco-Melchio/Veres/issues"
+  },
+  "homepage": "https://github.com/Marco-Melchio/Veres#readme"
 }

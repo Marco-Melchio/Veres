@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { getUserFile } = require('../../utils/user');
 const { getAllAchievements } = require('../../utils/achievements');
+const { EMOJI_OK, EMOJI_ERROR } = require('../../utils/emojis');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,7 +15,7 @@ module.exports = {
     const all = getAllAchievements();
 
     const shown = all.map(name => {
-      const symbol = unlocked[name] ? `:vOk` : `:vError:`;
+      const symbol = unlocked[name] ? `${EMOJI_OK}` : `${EMOJI_ERROR}`;
       return `${symbol} ${name}`;
     });
 

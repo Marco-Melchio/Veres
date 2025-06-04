@@ -1,14 +1,10 @@
-// shop.js (oder wie deine Datei heißt)
+// shop.js
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const shopItems = require('./shopItems');
 const { formatUserHeader } = require('./embedParts');
 const { EMOJI_COIN } = require('./emojis'); // <– Hier importieren wir das Coin-Emoji
 
-/**
- * Baut das Shop-Embed, in dem jedes Item mit Name, Level, Max-Level und Preis angezeigt wird.
- * Vor dem Preis steht jetzt immer das Coin-Emoji.
- */
 function buildShopEmbed(data, user) {
   const embed = new EmbedBuilder()
     .setTitle('🛍️ Veres-Shop')

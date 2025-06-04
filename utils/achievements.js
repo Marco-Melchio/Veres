@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const allAchievements = {
-  'Herzenssammler 🧺': user => totalHearts(user) >= 10,
-  'Goldgräber 💰': user => user.coins >= 100,
-  'Liebeslegende 💎': user => (user.inventory?.Legendary ?? 0) >= 1,
-  'Loyal Lover 🔥': user => user.streak >= 3,
+  'Herzenssammler ': user => totalHearts(user) >= 10,
+  'Goldgräber ': user => user.coins >= 100,
+  'Liebeslegende ': user => (user.inventory?.Legendary ?? 0) >= 1,
+  'Loyal Lover ': user => user.streak >= 3,
 };
 
 function totalHearts(user) {
