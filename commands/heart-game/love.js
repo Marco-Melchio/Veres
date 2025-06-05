@@ -1,8 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { getLoveDropBonus, getRareMultiplier } = require('../../utils/effects');
-const { getUserFile } = require('../../utils/user');
+const { getUser } = require('../../utils/user');
 const { checkAchievements } = require('../../utils/achievements');
-const fs = require('fs');
 
 const heartTypes = [
   { name: 'Common', emoji: '❤️', chance: 60 },
@@ -28,7 +27,7 @@ module.exports = {
   category: 'heart-game',
 
   async execute(interaction) {
-    const { data, file } = getUserFile(interaction.user.id);
+    const { data, save } = await getUser(interaction.user.id);
 
     const baseCount = Math.floor(Math.random() * 3) + 1;
     const bonus = getLoveDropBonus(data);
@@ -44,8 +43,8 @@ module.exports = {
       results[heart.name] = (results[heart.name] || 0) + multiplier;
     }
 
-    const unlocked = checkAchievements(interaction.user.id, data, file);
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    const unlocked = await checkAchievements(interaction.user.id, data, save);
+    await save(data);
 
     const earnedList = Object.entries(results)
       .map(([type, count]) => {

@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const fs = require('fs');
-const { getUserFile } = require('../../utils/user');
+const { getUser } = require('../../utils/user');
 
 
 module.exports = {
@@ -11,7 +10,7 @@ module.exports = {
 
   async execute(interaction) {
     const userId = interaction.user.id;
-    const { data, file } = getUserFile(userId);
+    const { data, save } = await getUser(userId);
 
     if (!data.upgrades.includes('AutoLove')) {
       const embed = new EmbedBuilder()
@@ -44,7 +43,7 @@ module.exports = {
 
     data.hearts += 1;
     data.lastClaim = new Date().toISOString();
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    await save(data);
 
     const embed = new EmbedBuilder()
       .setAuthor({

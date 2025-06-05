@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 
 const allAchievements = {
   'Herzenssammler ': user => totalHearts(user) >= 10,
@@ -12,7 +10,7 @@ function totalHearts(user) {
   return Object.values(user.inventory || {}).reduce((a, b) => a + b, 0);
 }
 
-function checkAchievements(userId, data, file) {
+async function checkAchievements(userId, data, save) {
   if (!data.achievements) data.achievements = {};
 
   let unlocked = [];
@@ -25,7 +23,7 @@ function checkAchievements(userId, data, file) {
   }
 
   if (unlocked.length > 0) {
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    await save(data);
   }
 
   return unlocked; // für Feedback

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { getUserFile } = require('../../utils/user');
+const { getUser } = require('../../utils/user');
 const { getLoveDropBonus, getRareMultiplier } = require('../../utils/effects');
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
   category: 'heart-game',
 
   async execute(interaction) {
-    const { data } = getUserFile(interaction.user.id);
+    const { data } = await getUser(interaction.user.id);
     const drops = getLoveDropBonus(data);
     const mult = (getRareMultiplier(data) * 100).toFixed(1);
 

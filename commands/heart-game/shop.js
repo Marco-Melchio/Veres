@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { getUserFile } = require('../../utils/user');
+const { getUser } = require('../../utils/user');
 const {
   buildShopEmbed,
   buildInventoryEmbed,
@@ -13,7 +13,7 @@ module.exports = {
   category: 'heart-game',
 
   async execute(interaction) {
-    const { data } = getUserFile(interaction.user.id);
+    const { data } = await getUser(interaction.user.id);
 
     const shopEmbed = buildShopEmbed(data, interaction.user);
     const invEmbed = buildInventoryEmbed(data, interaction.user);

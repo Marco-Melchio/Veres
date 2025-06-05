@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const fs = require('fs');
-const { getUserFile } = require('../../utils/user');
+const { getUser } = require('../../utils/user');
 
 const titleRoles = {
   'Anfänger der Liebe': 'Anfänger der Liebe',
@@ -24,11 +23,11 @@ module.exports = {
   category: 'heart-game',
 
   async execute(interaction) {
-    const { data, file } = getUserFile(interaction.user.id);
+    const { data, save } = await getUser(interaction.user.id);
     const oldTitle = data.title;
     const newTitle = autoAssignTitle(data);
     data.title = newTitle; // auto-update title
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    await save(data);
 
     if (interaction.guild) {
       try {

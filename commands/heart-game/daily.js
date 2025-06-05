@@ -1,7 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const fs = require('fs');
 const { EMOJI_COIN } = require('../../utils/emojis');
-const { getUserFile } = require('../../utils/user');
+const { getUser } = require('../../utils/user');
 
 function getReward(streak) {
   return 50 + streak * 10; // steigert sich pro Tag
@@ -14,7 +13,7 @@ module.exports = {
   category: 'heart-game',
 
   async execute(interaction) {
-    const { data, file } = getUserFile(interaction.user.id);
+    const { data, save } = await getUser(interaction.user.id);
     const now = Date.now();
     const last = data.lastDaily ? new Date(data.lastDaily).getTime() : 0;
 
@@ -43,7 +42,7 @@ module.exports = {
     data.coins += reward;
     data.lastDaily = new Date().toISOString();
 
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    await save(data);
 
     const embed = new EmbedBuilder()
       .setAuthor({
