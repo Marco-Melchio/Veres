@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { getUserFile } = require('../../utils/user');
+const { getUser } = require('../../utils/user');
 const { getAllAchievements } = require('../../utils/achievements');
 const { EMOJI_OK, EMOJI_ERROR } = require('../../utils/emojis');
 
@@ -10,7 +10,7 @@ module.exports = {
   category: 'heart-game',
 
   async execute(interaction) {
-    const { data } = getUserFile(interaction.user.id);
+    const { data } = await getUser(interaction.user.id);
     const unlocked = data.achievements || {};
     const all = getAllAchievements();
 

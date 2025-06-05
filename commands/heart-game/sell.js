@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { getUserFile } = require('../../utils/user');
-const fs = require('fs');
+const { getUser } = require('../../utils/user');
 const {
   EMOJI_OK,
   EMOJI_WARN,
@@ -34,7 +33,7 @@ module.exports = {
   category: 'heart-game',
 
   async execute(interaction) {
-    const { data, file } = getUserFile(interaction.user.id);
+    const { data, save } = await getUser(interaction.user.id);
 
     let totalCoins = 0;
     let sold = [];
@@ -54,7 +53,7 @@ module.exports = {
     }
 
     data.coins += totalCoins;
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    await save(data);
 
     const embed = new EmbedBuilder()
       .setAuthor({

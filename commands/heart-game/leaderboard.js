@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const fs = require('fs');
-const path = require('path');
+const { pool, init } = require('../../utils/db');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,13 +8,11 @@ module.exports = {
   category: 'heart-game',
 
   async execute(interaction) {
-    const userPath = path.join(__dirname, '../../data/users');
-    const files = fs.readdirSync(userPath).filter(f => f.endsWith('.json'));
-
-    const users = files.map(f => {
-      const userId = f.replace('.json', '');
-      const data = JSON.parse(fs.readFileSync(path.join(userPath, f)));
-      return { id: userId, coins: data.coins || 0 };
+    await init();
+    const [rows] = await pool.query('SELECT id, data FROM users');
+    const users = rows.map(r => {
+      const d = typeof r.data === 'string' ? JSON.parse(r.data) : r.data;
+      return { id: r.id, coins: d.coins || 0 };
     });
 
     const top = users.sort((a, b) => b.coins - a.coins).slice(0, 5);

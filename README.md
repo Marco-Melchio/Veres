@@ -20,10 +20,27 @@
 
 ---
 
+## 🛠️ Setup
+
+1. Installiere die Abhängigkeiten mit `npm install`.
+2. Lege eine `.env` Datei mit den Datenbank-Zugangsdaten an:
+
+```
+DB_HOST=dein-host
+DB_USER=dein-user
+DB_PASSWORD=dein-passwort
+DB_DATABASE=veres
+DISCORD_TOKEN=dein-bot-token
+```
+
+Der Bot erstellt die benötigte Tabelle bei Start automatisch.
+
+---
+
 ## 🧠 Architektur
 
 - **Command Loader**: Lädt alle Slash-Commands rekursiv aus dem `commands/`-Verzeichnis
-- **Benutzerdaten**: Als JSON-Dateien unter `data/users/` gespeichert
+ - **Benutzerdaten**: Werden in einer MySQL-Datenbank gespeichert
 - **Shop & Upgrades**: Zentrale Definitionen in `utils/shopItems.js`
 - **Hilfesystem**: Dynamisch generierte Kategorieliste mit Buttons und Dropdown-Menü
 - **Effekte & Achievements**: Modular erweiterbar
