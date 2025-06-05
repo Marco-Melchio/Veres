@@ -10,8 +10,13 @@ const defaultData = {
   title: 'Anfänger der Liebe',
 };
 
+let initialized = false;
+
 async function getUser(userId) {
-  await init();
+  if (!initialized) {
+    await init();
+    initialized = true;
+  }
   const [rows] = await pool.query('SELECT data FROM users WHERE id=?', [userId]);
   let data;
   if (rows.length === 0) {

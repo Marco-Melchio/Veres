@@ -27,13 +27,16 @@
 
 ```
 DB_HOST=dein-host
+DB_PORT=3306
 DB_USER=dein-user
 DB_PASSWORD=dein-passwort
 DB_DATABASE=veres
 DISCORD_TOKEN=dein-bot-token
+
 ```
 
 Der Bot erstellt die benötigte Tabelle bei Start automatisch.
+Hinweis: Der Host darf keinen Port enthalten. Verwende gegebenenfalls `DB_PORT`.
 
 ---
 
