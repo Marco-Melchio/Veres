@@ -3,7 +3,7 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const shopItems = require('./shopItems');
 const { formatUserHeader } = require('./embedParts');
-const { EMOJI_COIN, EMOJI_SHOP } = require('./emojis'); // <– Hier importieren wir das Coin-Emoji
+const { EMOJI_COIN, EMOJI_SHOP, EMOJI_BOOSTER, EMOJI_TITEL, EMOJI_HEART } = require('./emojis');
 
 function buildShopEmbed(data, user) {
   const embed = new EmbedBuilder()
@@ -68,10 +68,9 @@ function buildInventoryEmbed(data, user) {
   }).join('\n');
 
   const stats = [
-    `• ❤️ Herzen gesamt: ${hearts}`,
-    `• 💎 Seltene Herzen: ${rares}`,
-    `• 🔥 Streak: ${streak}`,
-    `• 🏷️ Titel: ${title}`
+    `• ${EMOJI_HEART} Herzen gesamt: ${hearts}`,
+    `• ${EMOJI_BOOSTER} Streak: ${streak}`,
+    `• ${EMOJI_TITEL} Titel: ${title}`
   ].join('\n');
 
   return new EmbedBuilder()

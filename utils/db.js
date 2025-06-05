@@ -22,5 +22,4 @@ async function init() {
     throw err;
   }
 }
-
 module.exports = { pool, init };

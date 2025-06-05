@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { getUser } = require('../../utils/user');
 const shopItems = require('../../utils/shopItems');
-const { EMOJI_COIN } = require('../../utils/emojis');
+const { EMOJI_COIN, EMOJI_HEART, EMOJI_BOOSTER, EMOJI_TITEL } = require('../../utils/emojis');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -27,10 +27,9 @@ module.exports = {
 
     // 📊 Stats
     const stats = [
-      `• ❤️ Herzen gesamt: ${hearts}`,
-      `• 💎 Seltene Herzen: ${rares}`,
-      `• 🔥 Streak: ${streak}`,
-      `• 🏷️ Titel: ${title}`
+      `• ${EMOJI_HEART} Herzen gesamt: ${hearts}`,
+      `• ${EMOJI_BOOSTER} Streak: ${streak}`,
+      `• ${EMOJI_TITEL} Titel: ${title}`
     ].join('\n');
 
     const embed = new EmbedBuilder()

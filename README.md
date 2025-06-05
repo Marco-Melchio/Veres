@@ -32,6 +32,7 @@ DB_USER=dein-user
 DB_PASSWORD=dein-passwort
 DB_DATABASE=veres
 DISCORD_TOKEN=dein-bot-token
+
 ```
 
 Der Bot erstellt die benötigte Tabelle bei Start automatisch.
