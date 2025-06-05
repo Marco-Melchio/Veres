@@ -1,8 +1,7 @@
 // commands/buy.js
 
 const { SlashCommandBuilder } = require('discord.js');
-const fs = require('fs');
-const { getUserFile } = require('../../utils/user');
+const { getUser } = require('../../utils/user');
 const upgrades = require('../../utils/shopItems');
 
 // Emojis aus der zentralen Datei importieren:
@@ -24,7 +23,7 @@ module.exports = {
   // Autocomplete-Handler: Zeigt nur verfügbare Upgrades (level < maxLevel).
   async autocomplete(interaction) {
     const focused = interaction.options.getFocused();
-    const { data } = getUserFile(interaction.user.id);
+    const { data } = await getUser(interaction.user.id);
 
     // Sicherstellen, dass data.upgradeLevels ein Objekt ist
     data.upgradeLevels = data.upgradeLevels ?? {};
@@ -44,7 +43,7 @@ module.exports = {
   // Execute-Handler: Führt den Kauf durch (Antworten sind öffentlich sichtbar).
   async execute(interaction) {
     const name = interaction.options.getString('item');
-    const { data, file } = getUserFile(interaction.user.id);
+    const { data, save } = await getUser(interaction.user.id);
 
     // Default-Werte initialisieren
     data.coins = data.coins ?? 0;
@@ -90,8 +89,8 @@ module.exports = {
       }
     }
 
-    // In Datei speichern
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+    // Daten speichern
+    await save(data);
 
     return interaction.reply({
       content: `${EMOJI_OK} Du hast **${name}** auf Level ${data.upgradeLevels[name]} gekauft!`,

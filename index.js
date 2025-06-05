@@ -165,17 +165,16 @@ client.on('interactionCreate', async (interaction) => {
 
     // === Shop-Buttons ===
     if (interaction.customId.startsWith('buy_')) {
-      const { getUserFile } = require('./utils/user');
+      const { getUser } = require('./utils/user');
       const shopItems = require('./utils/shopItems');
       const {
         buildShopEmbed,
         buildInventoryEmbed,
         buildShopButtons,
       } = require('./utils/shopUI');
-      const fsSync = require('fs');
 
       const name = interaction.customId.replace('buy_', '');
-      const { data, file } = getUserFile(interaction.user.id);
+      const { data, save } = await getUser(interaction.user.id);
       const item = shopItems[name];
       if (!item) return;
 
@@ -207,7 +206,7 @@ client.on('interactionCreate', async (interaction) => {
         }
       }
 
-      fsSync.writeFileSync(file, JSON.stringify(data, null, 2));
+      await save(data);
 
       const shopEmbed = buildShopEmbed(data, interaction.user);
       const invEmbed = buildInventoryEmbed(data, interaction.user);
