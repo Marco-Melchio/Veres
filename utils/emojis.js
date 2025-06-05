@@ -23,6 +23,8 @@ module.exports = {
     EMOJI_WARN:         '<:vWarning:1378364134512656496>',
     EMOJI_ERROR:        '<:vError:1378364041143128116>',
     EMOJI_INFO:         '<:vInfo:1378364038135681064>',
+    EMOJI_GOOD:         '<a:vgood:1379943680390992034>',
+    EMOJI_BAD:          '<a:vbad:1379943685625610300>',
 
     // Emoji Animated
     EMOJI_COIN:         '<a:vCoin:1378364042908925962>',

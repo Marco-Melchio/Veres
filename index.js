@@ -14,7 +14,7 @@ const {
 const fs = require('fs');
 const path = require('path');
 const PREFIX = 'v.';
-
+const { EMOJI_GOOD, EMOJI_BAD, EMOJI_COIN } = require('./utils/emojis');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 
@@ -32,7 +32,6 @@ function loadCommands(dir = path.join(__dirname, 'commands')) {
       try {
         const command = require(fullPath);
         if (!command.data || !command.execute) {
-          console.log(' ');
           console.warn(`ERROR     | Ungültiger Command (fehlende Struktur): ${fullPath}`);
           continue;
         }
@@ -158,7 +157,7 @@ client.on('interactionCreate', async (interaction) => {
       try {
         await interaction.message.delete();
       } catch (err) {
-        console.error('❌ Fehler beim Löschen der Hilfenachricht:', err);
+        console.error(`${EMOJI_BAD} Fehler beim Löschen der Hilfenachricht:`, err);
       }
       return;
     }
@@ -183,13 +182,13 @@ client.on('interactionCreate', async (interaction) => {
 
       if (level >= item.maxLevel) {
         return interaction.followUp({
-          content: `🔒 **${name}** ist bereits auf Max-Level.`,
+          content: `**${name}** ist bereits auf Max-Level.`,
         });
       }
 
       if (data.coins < price) {
         return interaction.followUp({
-          content: `❌ Du hast nicht genug Coins!\nBenötigt: **${price}**, du hast: **${data.coins}** 💰`,
+          content: `${EMOJI_BAD} Du hast nicht genug Coins!\nBenötigt: **${price}**, du hast: **${data.coins}** ${EMOJI_COIN}`,
         });
       }
 
@@ -218,7 +217,7 @@ client.on('interactionCreate', async (interaction) => {
       });
 
       await interaction.followUp({
-        content: `✅ Du hast **${name}** auf Level ${data.upgradeLevels[name]} verbessert!`,
+        content: `${EMOJI_GOOD} Du hast **${name}** auf Level ${data.upgradeLevels[name]} verbessert!`,
       });
     }
     return;
@@ -234,7 +233,7 @@ client.on('messageCreate', async (message) => {
 
   const command = client.commands.get(commandName);
   if (!command) {
-    return message.reply(`❌ Unbekannter Command: \`${commandName}\``);
+    return message.reply(`${EMOJI_BAD} Unbekannter Command: \`${commandName}\``);
   }
 
   try {
@@ -253,8 +252,8 @@ client.on('messageCreate', async (message) => {
 
     await command.execute(fakeInteraction, args);
   } catch (error) {
-    console.error(`❌ Fehler bei Prefix-Command "${commandName}":`, error);
-    await message.reply('❌ Beim Ausführen ist ein Fehler passiert.');
+    console.error(`${EMOJI_BAD} Fehler bei Prefix-Command "${commandName}":`, error);
+    await message.reply(`${EMOJI_BAD} Beim Ausführen ist ein Fehler passiert.`);
   }
 });
 

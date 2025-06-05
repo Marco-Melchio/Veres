@@ -5,7 +5,7 @@ const { getUser } = require('../../utils/user');
 const upgrades = require('../../utils/shopItems');
 
 // Emojis aus der zentralen Datei importieren:
-const { EMOJI_OK, EMOJI_WARN, EMOJI_ERROR, EMOJI_INFO } = require('../../utils/emojis');
+const { EMOJI_GOOD, EMOJI_BAD } = require('../../utils/emojis');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -54,7 +54,7 @@ module.exports = {
     const upgrade = upgrades[name];
     if (!upgrade) {
       return interaction.reply({
-        content: `${EMOJI_ERROR} Dieses Upgrade existiert nicht.`,
+        content: `${EMOJI_BAD} Dieses Upgrade existiert nicht.`,
         // keine ephemeral-Eigenschaft = öffentlich
       });
     }
@@ -62,7 +62,7 @@ module.exports = {
     // Prüfen, ob bereits Max-Level erreicht ist
     if (currentLevel >= upgrade.maxLevel) {
       return interaction.reply({
-        content: `${EMOJI_INFO} **${name}** ist bereits auf Max-Level.`,
+        content: `**${name}** ist bereits auf Max-Level.`,
       });
     }
 
@@ -72,7 +72,7 @@ module.exports = {
     // Prüfen, ob genug Coins vorhanden sind
     if (data.coins < price) {
       return interaction.reply({
-        content: `${EMOJI_WARN} Du hast nicht genug Coins für **${name}**. Benötigt: **${price}**, du hast: **${data.coins}**`,
+        content: `${EMOJI_BAD} Du hast nicht genug Coins für **${name}**. Benötigt: **${price}**, du hast: **${data.coins}**`,
       });
     }
 
@@ -93,7 +93,7 @@ module.exports = {
     await save(data);
 
     return interaction.reply({
-      content: `${EMOJI_OK} Du hast **${name}** auf Level ${data.upgradeLevels[name]} gekauft!`,
+      content: `${EMOJI_GOOD} Du hast **${name}** auf Level ${data.upgradeLevels[name]} gekauft!`,
     });
   },
 };
