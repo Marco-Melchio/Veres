@@ -181,14 +181,16 @@ client.on('interactionCreate', async (interaction) => {
       const price = Math.floor(item.basePrice * Math.pow(item.scaling, level));
 
       if (level >= item.maxLevel) {
-        return interaction.followUp({
+        return interaction.reply({
           content: `**${name}** ist bereits auf Max-Level.`,
+          ephemeral: true,
         });
       }
 
       if (data.coins < price) {
-        return interaction.followUp({
+        return interaction.reply({
           content: `${EMOJI_BAD} Du hast nicht genug Coins!\nBenötigt: **${price}**, du hast: **${data.coins}** ${EMOJI_COIN}`,
+          ephemeral: true,
         });
       }
 
